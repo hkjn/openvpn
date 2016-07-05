@@ -6,6 +6,7 @@ set -euo pipefail
 
 DOCKER_USER="hkjn"
 DOCKER_IMAGE="openvpn"
+
 ARCH="$(uname -m)"
 
 BUILD_DIR="$(mktemp -d)"
@@ -15,7 +16,7 @@ cp run "$BUILD_DIR/"
   # TODO(hkjn): Improve this special-casing to support different CPU
   # architectures. Just call it hkjn/x86_64-alpine as well?
   sed -i "s/FROM hkjn\//FROM hkjn\/$ARCH-/" "$BUILD_DIR/Dockerfile"
-  DOCKER_IMAGE="$ARCH-DOCKER_IMAGE"
+  DOCKER_IMAGE="$ARCH-$DOCKER_IMAGE"
 }
 
 TAG="$DOCKER_USER/$DOCKER_IMAGE"
