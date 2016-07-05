@@ -17,7 +17,7 @@ die() {
 [ -d /dev/net ] || mkdir -p /dev/net
 [ -c /dev/net/tun ] || mknod /dev/net/tun c 10 200
 
-cd /etc/openvpn
+cd /certs
 
 [ -e ca.pem ] || die "No CA certificate present; checked '$(pwd)/ca.pem'."
 [ -e $HOST-key.pem ] || die "No server key present; checked '$(pwd)/$HOST-key.pem'."

@@ -4,7 +4,7 @@
 # Start the server with a command like:
 # docker run -d -p 1194:1194/udp --privileged --net=host --name vpn-server \
 #   -e HOST=$(hostname) -e SERVER_IP=10.0.47.0 -e IP_MASK=255.255.255.128 \
-#   -v /etc/openvpn:/etc/openvpn hkjn/openvpn
+#   -v /etc/ssl/openvpn/:/certs hkjn/openvpn
 #
 # Running a server on $(hostname) requires that /etc/openvpn exists and contains the
 # following:
