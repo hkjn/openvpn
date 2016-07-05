@@ -13,7 +13,7 @@ IMAGE="hkjn/openvpn"
   # TODO(hkjn): Improve this special-casing to support different CPU
   # architectures. Just call it hkjn/x86_64-alpine as well?
   sed -i "s/FROM hkjn\//FROM hkjn\/$ARCH-/" "$BUILD_DIR/Dockerfile"
-  IMAGE="hkjn/ARCH-openvpn"
+  IMAGE="hkjn/$ARCH-openvpn"
 }
 
 docker build -t $IMAGE "$BUILD_DIR/"
