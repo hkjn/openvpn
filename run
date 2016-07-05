@@ -17,6 +17,7 @@ die() {
 [ -d /dev/net ] || mkdir -p /dev/net
 [ -c /dev/net/tun ] || mknod /dev/net/tun c 10 200
 
+[ -d /certs ] || die "No /certs directory."
 cd /certs
 
 [ -e ca.pem ] || die "No CA certificate present; checked '$(pwd)/ca.pem'."
