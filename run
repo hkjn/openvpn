@@ -19,10 +19,10 @@ die() {
 
 cd /etc/openvpn
 
-[ -e pki/ca.crt ] || die "No CA certificate present; checked /etc/openvpn/pki/ca.crt."
-[ -e pki/private/$HOST.key ] || die "No server key present; checked /etc/openvpn/pki/private/$HOST.key."
-[ -e pki/issued/$HOST.crt ] || die "No server certificate present; checked /etc/openvpn/pki/issued/$HOST.crt."
-[ ! -e pki/dh.pem ] || die "No Diffie-Hellman params present; checked pki/dh.pem."
+[ -e ca.pem ] || die "No CA certificate present; checked '$(pwd)/ca.pem'."
+[ -e $HOST-key.pem ] || die "No server key present; checked '$(pwd)/$HOST-key.pem'."
+[ -e $HOST.pem ] || die "No server certificate present; checked '$(pwd)/$HOST.pem'."
+[ ! -e dh.pem ] || die "No Diffie-Hellman params present; checked '$(pwd)/dh.pem'."
 
 if [ ! -f udp1194.conf ]; then
 		echo "Creating udp1194.conf.."
@@ -31,10 +31,10 @@ server $SERVER_IP $IP_MASK
 verb 3
 topology p2p
 
-key pki/private/$HOST.key
-ca pki/ca.crt
-cert pki/issued/$HOST.crt
-dh pki/dh.pem
+key $HOST-key.pem
+ca ca.pem
+cert $HOST.pem
+dh dh.pem
 keepalive 10 60
 persist-key
 persist-tun
