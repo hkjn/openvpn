@@ -22,5 +22,5 @@ cp run "$BUILD_DIR/"
 TAG="$DOCKER_USER/$DOCKER_IMAGE"
 docker build -t $TAG "$BUILD_DIR/"
 NO_PUSH=${NO_PUSH:-""}
-[[ "$NO_PUSH" ]] || docker push $IMAGE
+[[ "$NO_PUSH" ]] || docker push $DOCKER_IMAGE
 
