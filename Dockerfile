@@ -20,6 +20,6 @@ MAINTAINER Henrik Jonsson <me@hkjn.me>
 # Install openvpn.
 RUN apk add --no-cache openvpn
 
-COPY run.sh /usr/local/sbin/
-CMD ["run.sh"]
+COPY run /usr/local/sbin/
+CMD ["run"]
 
