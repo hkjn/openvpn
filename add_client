@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# Generates OpenVPN client config for specified client (can be any
+# name, like your Linux user name), and prints it to stdout.
+#
+set -euo pipefail
+die() {
+  echo "[FATAL] $@" >&2
+  exit 1
+}
+
+[ "$#" -eq 2 ] || die "Usage: $0 client server"
+CLIENT="$1"
+SERVER="$2"
+[ -d /etc/ssl/openvpn ] || die "No /etc/ssl/openvpn directory"
+cd /etc/ssl/openvpn
+[ -e ca.pem ] || die "No CA cert in '$(pwd)/ca.pem'."
+[ -e dh.pem ] || die "No DH parameters in '$(pwd)/dh.pem'."
+[ -e $CLIENT.pem ] || die "No client cert in '$(pwd)/$CLIENT.pem'."
+[ -e $CLIENT-key.pem ] || die "No client key in '$(pwd)/$CLIENT-key.pem'."
+
+cat <<EOF
+client
+nobind
+# Use tun device as we're in routing mode (not bridging).
+dev tun
+
+# Add a new default gateway that routes all traffic through
+# the VPN server.
+redirect-gateway def1
+
+# Enforce verification of server cert:
+# http://openvpn.net/index.php/open-source/documentation/howto.html#mitm
+remote-cert-tls server
+
+# Keep the tun device and key around through SIGUSR1 restarts (also
+# via ping-restart).
+persist-tun
+persist-key
+
+# Mute replay warnings, which doesn't lower security but prevents
+# massive server-side log spam when client connects over flaky
+# connections where TCP packets often are retransmitted (i.e. any WiFi).
+mute-replay-warnings
+
+# Attempt to restart connection after stalling out for 60 seconds.
+ping-restart 60
+
+<key>
+$(cat "$CLIENT-key.pem")
+</key>
+
+<cert>
+$(cat "$CLIENT.pem")
+</cert>
+
+<ca>
+$(cat "ca.pem")
+</ca>
+
+<dh>
+$(cat "dh.pem")
+</dh>
+
+<connection>
+remote $SERVER 1194 udp
+</connection>
+EOF
+
