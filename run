@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Runs OpenVPN server on 1194/udp.
+# Runs OpenVPN server on 1199/udp.
 #
 set -euo pipefail
 
@@ -25,9 +25,9 @@ cd /certs
 [ -e $HOST.pem ] || die "No server certificate present; checked '$(pwd)/$HOST.pem'."
 [ -e dh.pem ] || die "No Diffie-Hellman params present; checked '$(pwd)/dh.pem'."
 
-if [ ! -f udp1194.conf ]; then
-		echo "Creating udp1194.conf.."
-		cat >udp1194.conf <<EOF
+if [ ! -f udp1199.conf ]; then
+		echo "Creating udp1199.conf.."
+		cat >udp1199.conf <<EOF
 server $SERVER_IP $IP_MASK
 verb 3
 topology p2p
@@ -49,13 +49,13 @@ mute-replay-warnings
 client-to-client
 
 proto udp
-port 1194
-dev tun1194
-status openvpn-status-1194.log
+port 1199
+dev tun1199
+status openvpn-status-1199.log
 EOF
 fi
 
 
 echo "[INFO] Starting openvpn.."
-touch udp1194.log
-exec openvpn udp1194.conf
+touch udp1199.log
+exec openvpn udp1199.conf

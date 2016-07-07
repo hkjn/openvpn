@@ -2,7 +2,7 @@
 # OpenVPN server image.
 #
 # Start the server with a command like:
-# docker run -d -p 1194:1194/udp --privileged --net=host --name vpn-server \
+# docker run -d -p 1199:1199/udp --privileged --net=host --name vpn-server \
 #   -e HOST=$(hostname) -e SERVER_IP=10.0.47.0 -e IP_MASK=255.255.255.128 \
 #   -v /etc/ssl/openvpn/:/certs hkjn/openvpn
 #

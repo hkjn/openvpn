@@ -3,7 +3,7 @@ Description=OpenVPN server
 After=network-online.target
 
 [Service]
-ExecStart=/usr/bin/docker run -d --name vpn -p 1194:1194/udp --name vpn-server \
+ExecStart=/usr/bin/docker run -d --name vpn -p 1199:1199/udp --name vpn-server \
     --privileged --net=host -e HOST=vpn.hkjn.me -e SERVER_IP=10.0.47.0 \
     -e IP_MASK=255.255.255.128 -v /etc/ssl/openvpn/:/certs hkjn/armv7l-openvpn
 Restart=always
