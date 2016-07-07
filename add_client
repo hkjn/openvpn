@@ -63,7 +63,7 @@ $(cat "dh.pem")
 </dh>
 
 <connection>
-remote $SERVER 1194 udp
+remote $SERVER 1199 udp
 </connection>
 EOF
 
