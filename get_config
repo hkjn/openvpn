@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Generates OpenVPN client config for specified client (can be any
-# name, like your Linux user name), and prints it to stdout.
+# Generates OpenVPN client config for specified OpenVPN client with
+# existing cert and key, and prints it to stdout.
 #
 set -euo pipefail
 die() {
