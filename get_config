@@ -20,8 +20,8 @@ cd /etc/ssl/openvpn
 [ -e $CLIENT-key.pem ] || die "No client key in '$(pwd)/$CLIENT-key.pem'."
 
 cat <<EOF
+# Run in client mode.
 client
-nobind
 # Use tun device as we're in routing mode (not bridging).
 dev tun
 
