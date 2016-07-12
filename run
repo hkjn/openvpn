@@ -47,6 +47,9 @@ push "dhcp-option DNS 8.8.4.4"
 # connections sending duplicated UDP packets.
 mute-replay-warnings
 
+# Only support whitelist of ciphers.
+tls-cipher TLS-DHE-RSA-WITH-AES-256-GCM-SHA384
+
 client-to-client
 
 proto udp
