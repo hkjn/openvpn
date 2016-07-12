@@ -28,6 +28,8 @@ cd /certs
 if [ ! -f udp1199.conf ]; then
 		echo "Creating udp1199.conf.."
 		cat >udp1199.conf <<EOF
+mode server
+tls-server
 server $SERVER_IP $IP_MASK
 verb 3
 topology p2p
