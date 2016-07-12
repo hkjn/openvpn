@@ -22,6 +22,7 @@ cd /etc/ssl/openvpn
 cat <<EOF
 # Run in client mode.
 client
+
 # Use tun device as we're in routing mode (not bridging).
 dev tun
 
