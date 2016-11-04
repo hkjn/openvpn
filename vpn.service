@@ -8,7 +8,7 @@ ExecStartPre=-/usr/bin/docker rm vpn
 ExecStartPre=-/usr/bin/docker pull hkjn/armv7l-openvpn
 ExecStart=/usr/bin/docker run --name vpn -p 1199:1199/udp \
     --privileged --net=host -e HOST=vpn.hkjn.me -e SERVER_IP=10.0.47.0 \
-    -e IP_MASK=255.255.255.128 -v /etc/ssl/openvpn/:/certs hkjn/armv7l-openvpn
+    -e IP_MASK=255.255.255.128 -v /etc/vpn:/certs hkjn/armv7l-openvpn
 ExecStop=/usr/bin/docker stop vpn
 ExecStop=/usr/bin/docker rm vpn
 Restart=always
