@@ -12,8 +12,8 @@ die() {
 [ "$#" -eq 2 ] || die "Usage: $0 client server"
 CLIENT="$1"
 SERVER="$2"
-[ -d /etc/ssl/openvpn ] || die "No /etc/ssl/openvpn directory"
-cd /etc/ssl/openvpn
+[ -d /etc/vpn ] || die "No /etc/vpn directory"
+cd /etc/vpn
 [ -e ca.pem ] || die "No CA cert in '$(pwd)/ca.pem'."
 [ -e dh.pem ] || die "No DH parameters in '$(pwd)/dh.pem'."
 [ -e $CLIENT.pem ] || die "No client cert in '$(pwd)/$CLIENT.pem'."

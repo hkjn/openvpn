@@ -18,13 +18,14 @@ following files:
 * `$(hostname).pem`: The certificate for the server.
 * `dh.pem`: Diffie-Hellman parameters.
 
-## Generating certs
+## Generating server and client certs
 
 The certificates can be generated using `hkjn/pki`:
 
 ```
 $ docker run -v /etc/vpn:/certs hkjn/pki initca
 $ docker run -v /etc/vpn:/certs hkjn/pki gencert $(hostname)
+$ docker run -v /etc/vpn:/certs hkjn/pki gencert someclient
 
 ```
 
