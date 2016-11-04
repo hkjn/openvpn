@@ -13,7 +13,7 @@ docker run -d -p 1199:1199/udp --privileged --net=host --name vpn-server \
 
 Running a server on $(hostname) requires that /etc/openvpn exists and contains the
 following files:
-* `ca.crt`: The CA certificate.
+* `ca.pem`: The CA certificate.
 * `$(hostname)-key.pem`: The key for the server.
 * `$(hostname).pem`: The certificate for the server.
 * `dh.pem`: Diffie-Hellman parameters.
