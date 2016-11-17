@@ -48,7 +48,7 @@ push "dhcp-option DNS 8.8.4.4"
 mute-replay-warnings
 
 # Only support whitelist of ciphers.
-tls-cipher TLS-DHE-RSA-WITH-AES-256-GCM-SHA384
+tls-cipher TLS-DHE-RSA-WITH-AES-256-CBC-SHA
 
 client-to-client
 
