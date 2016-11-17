@@ -25,9 +25,9 @@ cd /certs
 [ -e $HOST.pem ] || die "No server certificate present; checked '$(pwd)/$HOST.pem'."
 [ -e dh.pem ] || die "No Diffie-Hellman params present; checked '$(pwd)/dh.pem'."
 
-if [ ! -f udp1199.conf ]; then
-		echo "Creating udp1199.conf.."
-		cat >udp1199.conf <<EOF
+if [ ! -f /etc/udp1199.conf ]; then
+		echo "Creating /etc/udp1199.conf.."
+		cat > /etc/udp1199.conf <<EOF
 mode server
 server $SERVER_IP $IP_MASK
 verb 3
@@ -47,8 +47,11 @@ push "dhcp-option DNS 8.8.4.4"
 # connections sending duplicated UDP packets.
 mute-replay-warnings
 
-# Only support whitelist of ciphers.
+# Only support TLS ciphers below.
 tls-cipher TLS-DHE-RSA-WITH-AES-256-CBC-SHA
+
+# Explicitly set server-side cipher.
+cipher AES-256-CBC
 
 client-to-client
 
@@ -62,4 +65,4 @@ fi
 
 echo "[INFO] Starting openvpn.."
 touch udp1199.log
-exec openvpn udp1199.conf
+exec openvpn /etc/udp1199.conf

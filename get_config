@@ -34,6 +34,9 @@ redirect-gateway def1
 # http://openvpn.net/index.php/open-source/documentation/howto.html#mitm
 remote-cert-tls server
 
+# Explicitly set client-side cipher.
+cipher AES-256-CBC
+
 # Keep the tun device and key around through SIGUSR1 restarts (also
 # via ping-restart).
 persist-tun
