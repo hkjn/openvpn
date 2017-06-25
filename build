@@ -9,17 +9,11 @@ DOCKER_IMAGE="openvpn"
 
 ARCH="$(uname -m)"
 BUILD_DIR="$(mktemp -d)"
+BASEIMAGE="hkjn/alpine:$ARCH"
+TAG="$DOCKER_USER/$DOCKER_IMAGE:$ARCH"
 
-cp Dockerfile "$BUILD_DIR/"
+sed "s|{{ARG_FROM}}|${BASEIMAGE}|g" Dockerfile.in > $BUILD_DIR/Dockerfile
 cp run "$BUILD_DIR/"
-[[ $ARCH = "x86_64" ]] || {
-  # TODO(hkjn): Improve this special-casing to support different CPU
-  # architectures. Just call it hkjn/x86_64-alpine as well?
-  sed -i "s/FROM hkjn\//FROM hkjn\/$ARCH-/" "$BUILD_DIR/Dockerfile"
-  DOCKER_IMAGE="$ARCH-$DOCKER_IMAGE"
-}
-
-TAG="$DOCKER_USER/$DOCKER_IMAGE"
 docker build -t $TAG "$BUILD_DIR/"
 NO_PUSH=${NO_PUSH:-""}
 [[ "$NO_PUSH" ]] || docker push $TAG

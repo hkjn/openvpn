@@ -23,9 +23,9 @@ following files:
 The certificates can be generated using `hkjn/pki`:
 
 ```
-$ docker run -v /etc/vpn:/certs hkjn/pki initca
-$ docker run -v /etc/vpn:/certs hkjn/pki gencert $(hostname)
-$ docker run -v /etc/vpn:/certs hkjn/pki gencert someclient
+$ docker run -v /etc/vpn:/certs hkjn/pki:$(uname -m) initca
+$ docker run -v /etc/vpn:/certs hkjn/pki:$(uname -m) gencert vpn.hkjn.me
+$ docker run -v /etc/vpn:/certs hkjn/pki:$(uname -m) gencert zc0
 
 ```
 
@@ -34,5 +34,26 @@ $ docker run -v /etc/vpn:/certs hkjn/pki gencert someclient
 The Diffie-Hellman parameters can be generated with:
 
 ```
-openssl dhparam -outform PEM -out dhparam.pem 4096
+$ openssl dhparam -outform PEM -out /etc/vpn/dh.pem 4096
+```
+
+## Generating client config
+
+A self-contained `.conf` file for the OpenVPN client with cert created
+with `gencert zc0` above can be generated with:
+
+```
+$ sudo ./get_config zc0 vpn.hkjn.me > ~/zc0.conf
+```
+
+## Setting iptables config
+
+There's some `POSTROUTING` rules necessary to allow traffic from the VPN to masquerade
+as originating as coming from the VPN server.
+
+Some sample iptables rules can be applied with:
+
+
+```
+$ sudo iptables-restore iptables.conf
 ```

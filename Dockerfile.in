@@ -1,7 +1,7 @@
 #
 # OpenVPN server image.
 #
-FROM hkjn/alpine
+FROM {{ARG_FROM}}
 
 MAINTAINER Henrik Jonsson <me@hkjn.me>
 
