@@ -31,7 +31,9 @@ if [ ! -f /etc/udp1199.conf ]; then
 mode server
 server $SERVER_IP $IP_MASK
 verb 3
-topology p2p
+# Note: Tried changing topology from "p2p" to "subnet", since iPad logs shows that only "subnet"
+# and "net30" topology is supported.
+topology subnet
 
 key $HOST-key.pem
 ca ca.pem
