@@ -31,8 +31,8 @@ if [ ! -f /etc/udp1199.conf ]; then
 mode server
 server $SERVER_IP $IP_MASK
 verb 3
-# Note: Tried changing topology from "p2p" to "subnet", since iPad logs shows that only "subnet"
-# and "net30" topology is supported.
+# Note: There might be some advantages to "p2p" topology, but OpenVPN connect
+# on iOS doesn't support it; only "subnet" and "net30" is supported.
 topology subnet
 
 key $HOST-key.pem
@@ -50,7 +50,7 @@ push "dhcp-option DNS 8.8.4.4"
 mute-replay-warnings
 
 # Only support TLS ciphers below.
-tls-cipher TLS-DHE-RSA-WITH-AES-256-CBC-SHA:TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA:TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA:TLS-DHE-RSA-WITH-AES-128-CBC-SHA:TLS-DHE-RSA-WITH-SEED-CBC-SHA:TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA
+tls-cipher TLS-DHE-RSA-WITH-AES-256-CBC-SHA:TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA:TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA
 
 # Explicitly set server-side cipher.
 cipher AES-256-CBC
