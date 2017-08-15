@@ -51,7 +51,7 @@ mute-replay-warnings
 tls-cipher TLS-DHE-RSA-WITH-AES-256-CBC-SHA
 
 # Explicitly set server-side cipher.
-cipher AES-256-CBC
+cipher AES-256-CBC AES-192-CBC BF-CBC
 
 client-to-client
 
